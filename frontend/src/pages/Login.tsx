@@ -22,8 +22,6 @@ export default function Login() {
 
       if (data.token) {
         localStorage.setItem("token", data.token);
-
-        // redirect to queue page
         navigate("/queue");
       } else {
         setError(data.message);
@@ -34,34 +32,62 @@ export default function Login() {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-[#0f172a] text-white">
-      <div className="bg-slate-800 p-8 rounded-xl w-80">
-        <h2 className="text-2xl mb-4 font-bold">Login</h2>
+    <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-[#0f172a] via-[#1e293b] to-[#020617] text-white px-4">
+      
+      {/* Glass Card */}
+      <div className="w-full max-w-sm backdrop-blur-lg bg-white/10 border border-white/20 shadow-2xl rounded-2xl p-8">
+        
+        <h2 className="text-3xl font-bold text-center mb-6 tracking-wide">
+          Welcome Back 👋
+        </h2>
 
-        <input
-          className="w-full p-2 mb-3 text-black"
-          type="email"
-          placeholder="Email"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-        />
+        {/* Email */}
+        <div className="mb-4">
+          <label className="text-sm text-gray-300">Email</label>
+          <input
+            type="email"
+            placeholder="Enter your email"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            className="w-full mt-1 p-3 rounded-lg bg-white/80 text-black outline-none focus:ring-2 focus:ring-blue-500 transition"
+          />
+        </div>
 
-        <input
-          className="w-full p-2 mb-3 text-black"
-          type="password"
-          placeholder="Password"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-        />
+        {/* Password */}
+        <div className="mb-5">
+          <label className="text-sm text-gray-300">Password</label>
+          <input
+            type="password"
+            placeholder="Enter your password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+            className="w-full mt-1 p-3 rounded-lg bg-white/80 text-black outline-none focus:ring-2 focus:ring-blue-500 transition"
+          />
+        </div>
 
+        {/* Button */}
         <button
           onClick={handleLogin}
-          className="w-full bg-blue-500 p-2 rounded"
+          className="w-full bg-blue-500 hover:bg-blue-600 transition-all duration-300 p-3 rounded-lg font-semibold shadow-lg hover:shadow-blue-500/30"
         >
           Login
         </button>
 
-        {error && <p className="text-red-400 mt-2">{error}</p>}
+        {/* Error */}
+        {error && (
+          <p className="text-red-400 text-sm mt-3 text-center">{error}</p>
+        )}
+
+        {/* Extra */}
+        <p className="text-gray-400 text-xs text-center mt-6">
+          Don’t have an account?{" "}
+          <span
+            onClick={() => navigate("/register")}
+            className="text-blue-400 cursor-pointer hover:underline"
+          >
+            Register
+          </span>
+        </p>
       </div>
     </div>
   );
